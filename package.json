@@ -1,0 +1,32 @@
+{
+  "name": "react-router-async-hash-link",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "license": "UNLICENSED",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "format": "yarn prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "yarn prettier-check \"src/**/*.{ts,tsx}\"",
+    "prebuild": "yarn clean",
+    "prewatch": "yarn clean",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "buffer": "5.1.0",
+    "date-fns": "^1.29.0",
+    "global": "^4.3.2",
+    "react": "^16.8.6",
+    "react-router-dom": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.9.2",
+    "@types/react": "^16.8.6",
+    "@types/react-router-dom": "^4.3.3",
+    "prettier": "1.14.2",
+    "prettier-check": "^2.0.0",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.0.1"
+  }
+}
