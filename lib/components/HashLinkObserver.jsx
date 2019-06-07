@@ -7,7 +7,7 @@ var observer_1 = require("../utils/observer");
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
 var HashLinkObserver = function (_a) {
-    var hash = _a.location.hash;
+    var hash = _a.location.hash, _b = _a.dependencies, dependencies = _b === void 0 ? [] : _b;
     /**
      * If there is a hash ID in the URL scroll to the corresponding element if it exists, otherwise:
      *  - create a new observer to check for the element when the DOM changes (loads)
@@ -17,8 +17,7 @@ var HashLinkObserver = function (_a) {
         var OBSERVER_TIMEOUT_MS = 5000;
         var loadingObserver;
         var observerTimeout;
-        // TODO: allPass deps?
-        if (!hash) {
+        if (!hash || dependencies.some(function (dep) { return dep; })) {
             return;
         }
         var elementId = hash.slice(1);
@@ -42,9 +41,7 @@ var HashLinkObserver = function (_a) {
         return function () {
             observer_1.resetLoadingObserver(loadingObserver, observerTimeout);
         };
-    }, 
-    // TODO: deps
-    [hash]);
+    }, [hash].concat(dependencies));
     return null;
 };
 exports.default = react_router_dom_1.withRouter(HashLinkObserver);

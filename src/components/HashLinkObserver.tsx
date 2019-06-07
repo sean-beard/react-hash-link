@@ -3,12 +3,19 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 import {disconnectMutationObserver, resetLoadingObserver} from '../utils/observer';
 
-type Props = RouteComponentProps;
+/**
+ * @prop dependencies - list of boolean values that will prevent a rerender if any are `true`
+ */
+export interface HashLinkObserverProps {
+  dependencies?: boolean[];
+}
+
+type Props = HashLinkObserverProps & RouteComponentProps;
 
 /**
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
-const HashLinkObserver: React.FC<Props> = ({location: {hash}}) => {
+const HashLinkObserver: React.FC<Props> = ({location: {hash}, dependencies = []}) => {
   /**
    * If there is a hash ID in the URL scroll to the corresponding element if it exists, otherwise:
    *  - create a new observer to check for the element when the DOM changes (loads)
@@ -20,8 +27,7 @@ const HashLinkObserver: React.FC<Props> = ({location: {hash}}) => {
       let loadingObserver: MutationObserver;
       let observerTimeout: number;
 
-      // TODO: allPass deps?
-      if (!hash) {
+      if (!hash || dependencies.some((dep) => dep)) {
         return;
       }
 
@@ -53,8 +59,7 @@ const HashLinkObserver: React.FC<Props> = ({location: {hash}}) => {
         resetLoadingObserver(loadingObserver, observerTimeout);
       };
     },
-    // TODO: deps
-    [hash]
+    [hash, ...dependencies]
   );
 
   return null;
