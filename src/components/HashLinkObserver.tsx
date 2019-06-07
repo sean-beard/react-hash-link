@@ -5,9 +5,11 @@ import {disconnectMutationObserver, resetLoadingObserver} from '../utils/observe
 
 /**
  * @prop dependencies - list of boolean values that will prevent a rerender if any are `true`
+ * @prop smoothScroll - whether or not there is a smooth transition animation on supported browsers
  */
 export interface HashLinkObserverProps {
   dependencies?: boolean[];
+  smoothScroll?: boolean;
 }
 
 type Props = HashLinkObserverProps & RouteComponentProps;
@@ -15,7 +17,14 @@ type Props = HashLinkObserverProps & RouteComponentProps;
 /**
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
-const HashLinkObserver: React.FC<Props> = ({location: {hash}, dependencies = []}) => {
+const HashLinkObserver: React.FC<Props> = ({
+  location: {hash},
+  dependencies = [],
+  smoothScroll = true
+}) => {
+  const scrollIntoViewOptions: ScrollIntoViewOptions | undefined = smoothScroll
+    ? {behavior: 'smooth'}
+    : undefined;
   /**
    * If there is a hash ID in the URL scroll to the corresponding element if it exists, otherwise:
    *  - create a new observer to check for the element when the DOM changes (loads)
@@ -34,8 +43,7 @@ const HashLinkObserver: React.FC<Props> = ({location: {hash}, dependencies = []}
       const elementId = hash.slice(1);
       const element = document.getElementById(elementId);
       if (element) {
-        // TODO: `smooth` prop?
-        element.scrollIntoView({behavior: 'smooth'});
+        element.scrollIntoView(scrollIntoViewOptions);
         return;
       }
 
@@ -43,7 +51,7 @@ const HashLinkObserver: React.FC<Props> = ({location: {hash}, dependencies = []}
       loadingObserver = new MutationObserver((_: MutationRecord[], observer: MutationObserver) => {
         const missingElement = document.getElementById(elementId);
         if (missingElement) {
-          missingElement.scrollIntoView({behavior: 'smooth'});
+          missingElement.scrollIntoView(scrollIntoViewOptions);
           resetLoadingObserver(observer, observerTimeout);
         }
       });

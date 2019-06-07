@@ -7,7 +7,10 @@ var observer_1 = require("../utils/observer");
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
 var HashLinkObserver = function (_a) {
-    var hash = _a.location.hash, _b = _a.dependencies, dependencies = _b === void 0 ? [] : _b;
+    var hash = _a.location.hash, _b = _a.dependencies, dependencies = _b === void 0 ? [] : _b, _c = _a.smoothScroll, smoothScroll = _c === void 0 ? true : _c;
+    var scrollIntoViewOptions = smoothScroll
+        ? { behavior: 'smooth' }
+        : undefined;
     /**
      * If there is a hash ID in the URL scroll to the corresponding element if it exists, otherwise:
      *  - create a new observer to check for the element when the DOM changes (loads)
@@ -23,15 +26,14 @@ var HashLinkObserver = function (_a) {
         var elementId = hash.slice(1);
         var element = document.getElementById(elementId);
         if (element) {
-            // TODO: `smooth` prop?
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.scrollIntoView(scrollIntoViewOptions);
             return;
         }
         // If there is a hash ID but no element, re-check after each DOM mutation
         loadingObserver = new MutationObserver(function (_, observer) {
             var missingElement = document.getElementById(elementId);
             if (missingElement) {
-                missingElement.scrollIntoView({ behavior: 'smooth' });
+                missingElement.scrollIntoView(scrollIntoViewOptions);
                 observer_1.resetLoadingObserver(observer, observerTimeout);
             }
         });
