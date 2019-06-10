@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 import {disconnectMutationObserver, resetLoadingObserver} from '../utils/observer';
 
@@ -12,16 +11,12 @@ export interface HashLinkObserverProps {
   smoothScroll?: boolean;
 }
 
-type Props = HashLinkObserverProps & RouteComponentProps;
+type Props = HashLinkObserverProps;
 
 /**
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
-const HashLinkObserver: React.FC<Props> = ({
-  location: {hash},
-  dependencies = [],
-  smoothScroll = true
-}) => {
+const HashLinkObserver: React.FC<Props> = ({dependencies = [], smoothScroll = true}) => {
   const scrollIntoViewOptions: ScrollIntoViewOptions | undefined = smoothScroll
     ? {behavior: 'smooth'}
     : undefined;
@@ -33,6 +28,7 @@ const HashLinkObserver: React.FC<Props> = ({
   React.useEffect(
     () => {
       const OBSERVER_TIMEOUT_MS = 5000;
+      const hash = window.location.hash;
       let loadingObserver: MutationObserver;
       let observerTimeout: number;
 
@@ -67,10 +63,10 @@ const HashLinkObserver: React.FC<Props> = ({
         resetLoadingObserver(loadingObserver, observerTimeout);
       };
     },
-    [hash, ...dependencies]
+    [window.location.href, ...dependencies]
   );
 
   return null;
 };
 
-export default withRouter(HashLinkObserver);
+export default HashLinkObserver;
