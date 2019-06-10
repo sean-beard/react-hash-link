@@ -6,7 +6,7 @@ var observer_1 = require("../utils/observer");
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
 var HashLinkObserver = function (_a) {
-    var _b = _a.dependencies, dependencies = _b === void 0 ? [] : _b, _c = _a.smoothScroll, smoothScroll = _c === void 0 ? true : _c;
+    var isPageLoading = _a.isPageLoading, _b = _a.smoothScroll, smoothScroll = _b === void 0 ? true : _b;
     var scrollIntoViewOptions = smoothScroll
         ? { behavior: 'smooth' }
         : undefined;
@@ -20,7 +20,7 @@ var HashLinkObserver = function (_a) {
         var hash = window.location.hash;
         var loadingObserver;
         var observerTimeout;
-        if (!hash || dependencies.some(function (dep) { return dep; })) {
+        if (!hash || isPageLoading) {
             return;
         }
         var elementId = hash.slice(1);
@@ -43,7 +43,7 @@ var HashLinkObserver = function (_a) {
         return function () {
             observer_1.resetLoadingObserver(loadingObserver, observerTimeout);
         };
-    }, [window.location.href].concat(dependencies));
+    }, [window.location.href, isPageLoading]);
     return null;
 };
 exports.default = HashLinkObserver;

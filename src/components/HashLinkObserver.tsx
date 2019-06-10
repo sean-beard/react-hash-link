@@ -3,11 +3,11 @@ import * as React from 'react';
 import {disconnectMutationObserver, resetLoadingObserver} from '../utils/observer';
 
 /**
- * @prop dependencies - list of boolean values that will prevent a rerender if any are `true`
+ * @prop isPageLoading - whether or not the page is loading
  * @prop smoothScroll - whether or not there is a smooth transition animation on supported browsers
  */
 export interface HashLinkObserverProps {
-  dependencies?: boolean[];
+  isPageLoading?: boolean;
   smoothScroll?: boolean;
 }
 
@@ -16,7 +16,7 @@ type Props = HashLinkObserverProps;
 /**
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
-const HashLinkObserver: React.FC<Props> = ({dependencies = [], smoothScroll = true}) => {
+const HashLinkObserver: React.FC<Props> = ({isPageLoading, smoothScroll = true}) => {
   const scrollIntoViewOptions: ScrollIntoViewOptions | undefined = smoothScroll
     ? {behavior: 'smooth'}
     : undefined;
@@ -32,7 +32,7 @@ const HashLinkObserver: React.FC<Props> = ({dependencies = [], smoothScroll = tr
       let loadingObserver: MutationObserver;
       let observerTimeout: number;
 
-      if (!hash || dependencies.some((dep) => dep)) {
+      if (!hash || isPageLoading) {
         return;
       }
 
@@ -63,7 +63,7 @@ const HashLinkObserver: React.FC<Props> = ({dependencies = [], smoothScroll = tr
         resetLoadingObserver(loadingObserver, observerTimeout);
       };
     },
-    [window.location.href, ...dependencies]
+    [window.location.href, isPageLoading]
   );
 
   return null;

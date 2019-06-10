@@ -1,10 +1,10 @@
 import * as React from 'react';
 /**
- * @prop dependencies - list of boolean values that will prevent a rerender if any are `true`
+ * @prop isPageLoading - whether or not the page is loading
  * @prop smoothScroll - whether or not there is a smooth transition animation on supported browsers
  */
 export interface HashLinkObserverProps {
-    dependencies?: boolean[];
+    isPageLoading?: boolean;
     smoothScroll?: boolean;
 }
 declare type Props = HashLinkObserverProps;
