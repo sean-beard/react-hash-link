@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var react_router_dom_1 = require("react-router-dom");
 var observer_1 = require("../utils/observer");
 /**
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
  */
 var HashLinkObserver = function (_a) {
-    var hash = _a.location.hash, _b = _a.dependencies, dependencies = _b === void 0 ? [] : _b, _c = _a.smoothScroll, smoothScroll = _c === void 0 ? true : _c;
+    var _b = _a.dependencies, dependencies = _b === void 0 ? [] : _b, _c = _a.smoothScroll, smoothScroll = _c === void 0 ? true : _c;
     var scrollIntoViewOptions = smoothScroll
         ? { behavior: 'smooth' }
         : undefined;
@@ -18,6 +17,7 @@ var HashLinkObserver = function (_a) {
      */
     React.useEffect(function () {
         var OBSERVER_TIMEOUT_MS = 5000;
+        var hash = window.location.hash;
         var loadingObserver;
         var observerTimeout;
         if (!hash || dependencies.some(function (dep) { return dep; })) {
@@ -43,7 +43,7 @@ var HashLinkObserver = function (_a) {
         return function () {
             observer_1.resetLoadingObserver(loadingObserver, observerTimeout);
         };
-    }, [hash].concat(dependencies));
+    }, [window.location.href].concat(dependencies));
     return null;
 };
-exports.default = react_router_dom_1.withRouter(HashLinkObserver);
+exports.default = HashLinkObserver;
