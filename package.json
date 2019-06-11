@@ -1,5 +1,5 @@
 {
-  "name": "react-router-async-hash-link",
+  "name": "react-hash-link",
   "version": "0.0.1",
   "main": "lib/index.js",
   "license": "UNLICENSED",
@@ -26,5 +26,34 @@
     "prettier-check": "^2.0.0",
     "rimraf": "^2.6.3",
     "typescript": "^3.0.1"
-  }
+  },
+  "description": "> Painless hash link routing for React applications.",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sean-beard/react-hash-link.git"
+  },
+  "keywords": [
+    "react",
+    "router",
+    "hash",
+    "link",
+    "fragment",
+    "pushstate",
+    "routing",
+    "route",
+    "scroll",
+    "element",
+    "url",
+    "anchor",
+    "observe",
+    "observer"
+  ],
+  "author": "Sean Beard",
+  "bugs": {
+    "url": "https://github.com/sean-beard/react-hash-link/issues"
+  },
+  "homepage": "https://github.com/sean-beard/react-hash-link#readme"
 }
