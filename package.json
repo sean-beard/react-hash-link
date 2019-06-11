@@ -14,13 +14,9 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "buffer": "5.1.0",
-    "date-fns": "^1.29.0",
-    "global": "^4.3.2",
     "react": "^16.8.6"
   },
   "devDependencies": {
-    "@types/node": "^10.9.2",
     "@types/react": "^16.8.6",
     "prettier": "1.14.2",
     "prettier-check": "^2.0.0",
