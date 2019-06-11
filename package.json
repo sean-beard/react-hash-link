@@ -1,8 +1,8 @@
 {
   "name": "react-hash-link",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "lib/index.js",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
