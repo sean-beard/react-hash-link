@@ -66,9 +66,32 @@ Visit that page and use the element's `id` as your hash fragment.
 
 You're done, enjoy!
 
+## Server-side Rendering
+
+When leveraging SSR, use the `AsyncHashLinkObserver` component identically to `HashLinkObserver`.
+
+```javascript
+// ...
+import {AsyncHashLinkObserver} from "react-hash-link";
+// ...
+export const AnyOfMyAppComponents = () => {
+  // ...
+  return (
+    <div>
+      <AnyOtherComponents />
+      <AsyncHashLinkObserver />
+      <AnyOtherComponents />
+    </div>
+  );
+};
+// ...
+```
+
+That's it!
+
 ## API Reference
 
-### `HashLinkObserver` Properties
+### `HashLinkObserver` / `AsyncHashLinkObserver` Properties
 
 **isPageLoading** - An optional boolean value designating whether or not the page is still loading. The `HashLinkObserver` won't try to scroll to the target element when the value is `true` and will wait until value is `false` before attempting.
 

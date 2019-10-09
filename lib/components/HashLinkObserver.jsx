@@ -1,6 +1,13 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = require("react");
+var React = __importStar(require("react"));
 var observer_1 = require("../utils/observer");
 /**
  * Adds ability to scroll to a child component with an ID corresponding to a URL hash ID
