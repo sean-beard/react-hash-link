@@ -27,6 +27,12 @@ Navigate to the directory containing your `package.json` file
 Install `react-hash-link`
 
 ```shell
+npm install react-hash-link
+```
+
+or
+
+```shell
 yarn add react-hash-link
 ```
 
