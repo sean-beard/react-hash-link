@@ -18,6 +18,8 @@ Contrary to the popular solutions for routing directly to elements on a page in 
 
 ✔ Works with `react-router` but not dependent on it
 
+✔ Works with server-side rendering
+
 ✔ All of the above scenarios function correctly when used across all major browsers (including IE)
 
 ## Getting Started
