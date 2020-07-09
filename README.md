@@ -2,7 +2,7 @@
 
 > Painless hash link routing for React applications.
 
-[![npm](https://img.shields.io/npm/dt/react-hash-link)]()
+[![npm](https://img.shields.io/npm/dt/react-hash-link)](https://www.npmjs.com/package/react-hash-link)
 
 The `HashLinkObserver` component can be rendered at any level of your component tree and will watch for hash fragments in your URL. When a hash link is encountered, the `HashLinkObserver` will scroll to the corresponding element on the page with `id="Your-Hash-ID"`.
 
