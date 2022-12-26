@@ -39,7 +39,9 @@ const HashLinkObserver: React.FC<Props> = ({isPageLoading, smoothScroll = true})
       const elementId = hash.slice(1);
       const element = document.getElementById(elementId);
       if (element) {
+        element.setAttribute('tabindex', '-1');
         element.scrollIntoView(scrollIntoViewOptions);
+        element.focus();
         return;
       }
 
@@ -47,7 +49,9 @@ const HashLinkObserver: React.FC<Props> = ({isPageLoading, smoothScroll = true})
       loadingObserver = new MutationObserver((_: MutationRecord[], observer: MutationObserver) => {
         const missingElement = document.getElementById(elementId);
         if (missingElement) {
+          missingElement.setAttribute('tabindex', '-1');
           missingElement.scrollIntoView(scrollIntoViewOptions);
+          missingElement.focus();
           resetLoadingObserver(observer, observerTimeout);
         }
       });

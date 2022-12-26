@@ -33,14 +33,18 @@ var HashLinkObserver = function (_a) {
         var elementId = hash.slice(1);
         var element = document.getElementById(elementId);
         if (element) {
+            element.setAttribute('tabindex', '-1');
             element.scrollIntoView(scrollIntoViewOptions);
+            element.focus();
             return;
         }
         // If there is a hash ID but no element, re-check after each DOM mutation
         loadingObserver = new MutationObserver(function (_, observer) {
             var missingElement = document.getElementById(elementId);
             if (missingElement) {
+                missingElement.setAttribute('tabindex', '-1');
                 missingElement.scrollIntoView(scrollIntoViewOptions);
+                missingElement.focus();
                 observer_1.resetLoadingObserver(observer, observerTimeout);
             }
         });
